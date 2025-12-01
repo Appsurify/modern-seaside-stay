@@ -14,27 +14,35 @@
         var l = window.location;
         var pathname = l.pathname;
         
-        // Определяем base path (все сегменты кроме последнего)
-        // Для /modern-seaside-stay/contact -> base = /modern-seaside-stay/
+        // Убираем trailing slash из pathname для обработки
+        pathname = pathname.replace(/\/$/, '');
+        
+        // Разбиваем путь на части
         var pathParts = pathname.split('/').filter(function(part) {
           return part.length > 0;
         });
         
-        // Если это корневой домен или только один сегмент (base), перенаправляем на index.html
-        if (pathParts.length <= 1) {
-          var base = pathParts.length === 1 ? '/' + pathParts[0] + '/' : '/';
-          window.location.replace(base + 'index.html');
+        // Если это корневой домен, перенаправляем на index.html
+        if (pathParts.length === 0) {
+          window.location.replace('/index.html');
+          return;
+        }
+        
+        // Если только один сегмент (base), перенаправляем на base/index.html
+        if (pathParts.length === 1) {
+          window.location.replace('/' + pathParts[0] + '/index.html');
           return;
         }
         
         // Определяем base path (первый сегмент)
-        var base = '/' + pathParts[0] + '/';
+        var base = '/' + pathParts[0];
         
-        // Получаем путь после base (например, /contact из /modern-seaside-stay/contact)
-        var pathAfterBase = '/' + pathParts.slice(1).join('/');
+        // Получаем путь после base (например, contact из /modern-seaside-stay/contact)
+        var pathAfterBase = pathParts.slice(1).join('/');
         
-        // Формируем правильный URL: base + index.html?/path
-        var redirectPath = base + 'index.html?/' + pathAfterBase.replace(/^\//, '').replace(/&/g, '~and~');
+        // Формируем правильный URL: base/index.html?/path
+        // Важно: base без trailing slash, затем /index.html
+        var redirectPath = base + '/index.html?/' + pathAfterBase.replace(/&/g, '~and~');
         
         if (l.search) {
           redirectPath += '&' + l.search.slice(1).replace(/&/g, '~and~');
