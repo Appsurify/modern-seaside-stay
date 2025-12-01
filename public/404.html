@@ -9,35 +9,40 @@
     <meta property="og:image" content="./og-image.png" />
     <script type="text/javascript">
       // Single Page Apps for GitHub Pages
-      // https://github.com/rafgraph/spa-github-pages
-      // Автоматически определяет base path из URL
+      // Автоматически определяет base path и перенаправляет на index.html
       (function() {
-        var pathSegmentsToKeep = 1;
         var l = window.location;
         var pathname = l.pathname;
         
-        // Автоматически определяем base path (первый сегмент после домена)
+        // Определяем base path (все сегменты кроме последнего)
+        // Для /modern-seaside-stay/contact -> base = /modern-seaside-stay/
         var pathParts = pathname.split('/').filter(function(part) {
           return part.length > 0;
         });
         
-        // Если это не корневой домен, берем первый сегмент как base
-        var base = pathParts.length > 0 ? '/' + pathParts[0] : '';
-        
-        // Если уже на правильном пути, просто перенаправляем на index.html
-        if (pathname === base || pathname === base + '/') {
-          window.location.replace(base + '/index.html');
+        // Если это корневой домен или только один сегмент (base), перенаправляем на index.html
+        if (pathParts.length <= 1) {
+          var base = pathParts.length === 1 ? '/' + pathParts[0] + '/' : '/';
+          window.location.replace(base + 'index.html');
           return;
         }
         
-        // Перенаправляем на index.html с сохранением пути
-        var redirectPath = base + '/index.html?/' + pathname.replace(base, '').replace(/^\//, '').replace(/&/g, '~and~');
+        // Определяем base path (первый сегмент)
+        var base = '/' + pathParts[0] + '/';
+        
+        // Получаем путь после base (например, /contact из /modern-seaside-stay/contact)
+        var pathAfterBase = '/' + pathParts.slice(1).join('/');
+        
+        // Формируем правильный URL: base + index.html?/path
+        var redirectPath = base + 'index.html?/' + pathAfterBase.replace(/^\//, '').replace(/&/g, '~and~');
+        
         if (l.search) {
           redirectPath += '&' + l.search.slice(1).replace(/&/g, '~and~');
         }
         if (l.hash) {
           redirectPath += l.hash;
         }
+        
         window.location.replace(redirectPath);
       }());
     </script>

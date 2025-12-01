@@ -6,7 +6,7 @@ import { componentTagger } from "lovable-tagger";
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   const base = mode === 'production' && process.env.GITHUB_REPOSITORY
-    ? `/${process.env.GITHUB_REPOSITORY.split('/')[1]}`
+    ? `/${process.env.GITHUB_REPOSITORY.split('/')[1]}/`
     : '/';
 
   return {

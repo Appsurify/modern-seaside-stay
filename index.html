@@ -15,8 +15,14 @@
           var decoded = l.search.slice(1).split('&').map(function(s) { 
             return s.replace(/~and~/g, '&')
           }).join('?');
+          
+          // Определяем base path из текущего pathname
+          var pathname = l.pathname;
+          var base = pathname.substring(0, pathname.lastIndexOf('/') + 1);
+          
+          // Восстанавливаем путь с учетом base
           window.history.replaceState(null, null,
-              l.pathname.slice(0, -1) + decoded + l.hash
+              base + decoded + l.hash
           );
         }
       }(window.location))
