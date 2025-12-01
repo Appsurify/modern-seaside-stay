@@ -31,6 +31,31 @@
       }(window.location))
     </script>
     <!-- End Single Page Apps for GitHub Pages -->
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KZT2PC7BMK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-KZT2PC7BMK');
+    </script>
+
+<!--    <script src="/assets/google-custom-event-tracker.umd.js"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/@appsurify-testmap/google-custom-event-tracker@0.7.0"></script>
+    <script>
+      window.GoogleCustomEventTracker.initTracker({
+        send(payload) {
+          gtag("event", "ui_event", payload);
+        },
+        captureSelector: true,
+        capturePath: true,
+        captureText: true,
+        captureXPath: true,
+      });
+    </script>
+
+
   </head>
 
   <body>
