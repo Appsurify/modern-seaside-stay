@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import ThemeToggle from "./ThemeToggle";
-import LanguageSelector from "./LanguageSelector";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -34,9 +33,9 @@ export default function Navbar() {
   
   return <header className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300", scrolled ? "bg-white/80 dark:bg-card/80 backdrop-blur-lg py-3 shadow-md" : "bg-transparent py-5")}>
       <nav className="container flex justify-between items-center">
-        <div className="flex items-center space-x-2">
-          <LanguageSelector />
-        </div>
+        <Link to="/" className="text-2xl font-bold text-primary">
+          MareSereno
+        </Link>
 
         {/* Desktop Navigation */}
         <ul className="hidden md:flex space-x-8">
@@ -68,8 +67,7 @@ export default function Navbar() {
         <div className={cn("fixed inset-y-0 right-0 w-3/4 max-w-sm bg-card shadow-xl p-6 transition-transform duration-300 ease-in-out", mobileMenuOpen ? "translate-x-0" : "translate-x-full")}>
           <div className="flex flex-col h-full justify-between">
             <div>
-              <div className="flex justify-between mb-8">
-                <LanguageSelector />
+              <div className="flex justify-end mb-8">
                 <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(false)} className="rounded-full">
                   <X className="h-6 w-6" />
                 </Button>
