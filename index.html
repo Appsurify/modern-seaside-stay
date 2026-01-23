@@ -41,17 +41,16 @@
       gtag('config', 'G-KZT2PC7BMK');
     </script>
 
-    <script src="/assets/google-custom-event-tracker.umd.js"></script>
-<!--    <script src="https://cdn.jsdelivr.net/npm/@appsurify-testmap/google-custom-event-tracker@0.8.1"></script>-->
+<!--    <script src="/assets/google-custom-event-tracker.umd.js"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/@appsurify-testmap/google-custom-event-tracker@latest"></script>
     <script>
       window.GoogleCustomEventTracker.initTracker({
         send(payload) {
           gtag("event", "ui_event", payload);
         },
         captureSelector: true,
-        capturePath: true,
         captureText: true,
-        captureXPath: true,
+        debug: true,
         // events: {
         //   mouseUp: false,
         //   mouseDown: false,

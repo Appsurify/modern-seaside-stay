@@ -13,7 +13,17 @@ export default defineConfig(({ mode }) => {
     base,
     server: {
       host: "::",
-      port: 8080,
+      port: 9080,
+      headers: {
+        "Content-Security-Policy": "frame-ancestors 'self' http://localhost:* https://your-parent-app-domain.com",
+      },
+    },
+    preview: {
+      host: "::",
+      port: 9081,
+      headers: {
+        "Content-Security-Policy": "frame-ancestors 'self' http://localhost:* https://your-parent-app-domain.com",
+      },
     },
   plugins: [
     react(),
